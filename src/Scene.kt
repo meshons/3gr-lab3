@@ -11,13 +11,19 @@ class Scene (
 
   val vsTrafo = Shader(gl, GL.VERTEX_SHADER, "shaders/trafo-vs.glsl")
   val vsBackground = Shader(gl, GL.VERTEX_SHADER, "shaders/background-vs.glsl")
+  val vsInfinitePlane = Shader(gl, GL.VERTEX_SHADER, "shaders/infinite-plane-vs.glsl")
+
   val fsSolid = Shader(gl, GL.FRAGMENT_SHADER, "shaders/solid-fs.glsl")
   val fsTextured = Shader(gl, GL.FRAGMENT_SHADER, "shaders/textured-fs.glsl")
   val fsBackground = Shader(gl, GL.FRAGMENT_SHADER, "shaders/background-fs.glsl")
+  val fsInfinitePlane = Shader(gl, GL.FRAGMENT_SHADER, "shaders/infinite-plane-fs.glsl")
+
   val solidProgram = Program(gl, vsTrafo, fsSolid)
   val texturedProgram = Program(gl, vsTrafo, fsTextured)
-  val quadGeometry = TexturedQuadGeometry(gl)
   val backgroundProgram = Program(gl, vsBackground, fsBackground)
+  val infinitePlaneProgram = Program(gl, vsInfinitePlane, fsInfinitePlane)
+
+  val quadGeometry = TexturedQuadGeometry(gl)
 
   val slowpoke = GameObject(
           MultiMesh(
@@ -45,10 +51,24 @@ class Scene (
           )
   )
 
+  val infinitePlane = GameObject(
+          Mesh(
+                  TexturedMaterial(
+                          infinitePlaneProgram,
+                          Texture2D(gl, "media/infiniteplane.jpg")
+                  ),
+                  InfinitePlaneGeometry(gl)
+          ),
+          Vec3(0.0f, 0.0f, -30.0f),
+          0.3f,
+          Vec3(16.0f, 10.0f)
+  )
+
   val gameObjects = ArrayList<GameObject>()
   init{
     gameObjects.add(background)
     gameObjects.add(slowpoke)
+    gameObjects.add(infinitePlane)
   }
 
   val camera = PerspectiveCamera(*Program.all)

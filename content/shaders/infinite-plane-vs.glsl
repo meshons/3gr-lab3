@@ -1,19 +1,18 @@
 #version 300 es
 
 in vec4 vertexPosition;
-in vec2 vertexTexCoord;
 
 uniform struct{
-	mat4 modelMatrix;
+  mat4 modelMatrix;
 } gameObject;
 
 uniform struct{
-	mat4 viewProjMatrix;
+  mat4 viewProjMatrix;
 } camera;
 
-out vec2 tex;
+out vec4 tex;
 
 void main(void) {
   gl_Position = vertexPosition * gameObject.modelMatrix * camera.viewProjMatrix;
-  tex = vertexTexCoord;
+  tex = vec4(vertexPosition.x, -1.0f * vertexPosition.y, vertexPosition.zw);
 }
