@@ -1,0 +1,10 @@
+
+web/
+
+.gradle/
+
+.idea/
+
+build/
+
+lab.pptx
