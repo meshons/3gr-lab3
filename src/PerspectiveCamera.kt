@@ -57,7 +57,7 @@ class PerspectiveCamera(vararg programs : Program) : UniformProvider("camera") {
           0.0f ,    0.0f ,  (n+f)/(n-f) ,  -1.0f, 
           0.0f ,    0.0f ,  2*n*f/(n-f) ,   0.0f)
 
-    rayDirMatrix.set(viewProjMatrix.invert() * Mat4().translate(position).invert())
+    rayDirMatrix.set(Mat4().translate(position) * viewProjMatrix.clone()).invert()
   }
 
   fun setAspectRatio(ar : Float) { 

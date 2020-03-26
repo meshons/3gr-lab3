@@ -9,9 +9,6 @@ uniform struct {
     samplerCube envTexture;
 } material;
 
-
-
-
 void main(void) {
     fragmentColor = texture ( material.envTexture, rayDir.xyz);
 }

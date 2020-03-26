@@ -47,8 +47,8 @@ class Scene (
 
   val gameObjects = ArrayList<GameObject>()
   init{
-    gameObjects.add(slowpoke)
     gameObjects.add(background)
+    gameObjects.add(slowpoke)
   }
 
   val camera = PerspectiveCamera(*Program.all)

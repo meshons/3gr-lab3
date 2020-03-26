@@ -10,6 +10,6 @@ uniform struct{
 out vec4 rayDir;
 
 void main(void) {
-    gl_Position = vertexPosition;
-    rayDir = vertexPosition * camera.viewProjMatrix * camera.rayDirMatrix;
+    gl_Position = vec4(vertexPosition.xy, 0.99999, vertexPosition.w);
+    rayDir = normalize(vertexPosition * camera.rayDirMatrix);
 }
